@@ -1,6 +1,6 @@
 # mdformat-wikilink
 
-An [mdformat][] plugin for ensuring that wiki-style links (`[[Target|Alias]]`)
+An [mdformat] plugin for ensuring that wiki-style links (`[[Target|Alias]]`)
 are preserved during formatting.
 
 Source:
@@ -20,7 +20,5 @@ Without the plugin:
 ```markdown
 This is a \[\[link\]\].
 ```
-
-
 
 [mdformat]: https://github.com/executablebooks/mdformat

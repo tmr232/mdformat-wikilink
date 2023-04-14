@@ -1,6 +1,5 @@
 import re
 
-
 from markdown_it import MarkdownIt
 from markdown_it.rules_inline import StateInline
 
