@@ -1,8 +1,8 @@
 from collections.abc import Mapping
+from mdformat.renderer.typing import Render
 
 from markdown_it import MarkdownIt
 from mdformat.renderer import RenderContext, RenderTreeNode
-from mdformat.renderer.typing import Render
 
 from mdformat_wikilink.mdit_wikilink_plugin import wikilink_plugin
 
