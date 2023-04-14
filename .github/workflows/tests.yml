@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        python-version: [ 3.11 ]  # alter to sweep currently GA'ed versions
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Installation (deps and package)
+        run: |
+          pip install "poetry==1.4.2"
+          poetry config virtualenvs.create false
+          poetry install --no-interaction --no-ansi
+
+      - name: Run Linters
+        run: nox -s lint
+
+      - name: Run pytest
+        run: nox -s test
+
+      - name: Upload to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.xml
+          flags: pytest, python-${{ matrix.python-version }}, ${{ matrix.os }}
+          fail_ci_if_error: true
+          verbose: true
+
+  results:
+    # Based on https://github.com/orgs/community/discussions/26822#discussioncomment-3305794
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    name: Final Results
+    needs: [ tests ]
+    steps:
+      - run: |
+          result="${{ needs.tests.result }}"
+          if [[ $result == "success" || $result == "skipped" ]]; then
+            exit 0
+          else
+            exit 1
+          fi
