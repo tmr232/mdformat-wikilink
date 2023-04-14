@@ -19,10 +19,5 @@ def _wikilink_inline(state: StateInline, silent: bool) -> bool:
     return True
 
 
-def _wikilink_render(self, tokens, idx, options, env) -> str:
-    return tokens[idx].content
-
-
 def wikilink_plugin(md: MarkdownIt) -> None:
     md.inline.ruler.push("wikilink", _wikilink_inline)
-    md.add_render_rule("wikilink", _wikilink_render)

@@ -15,8 +15,4 @@ def _render_wikilink(node: RenderTreeNode, context: RenderContext) -> str:
     return node.content
 
 
-def extra_code() -> None:
-    print("Extra code!!!")
-
-
 RENDERERS: Mapping[str, Render] = {"wikilink": _render_wikilink}
