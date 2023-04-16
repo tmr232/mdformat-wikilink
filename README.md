@@ -21,4 +21,16 @@ Without the plugin:
 This is a \[\[link\]\].
 ```
 
+## Installation
+
+After installing mdformat,
+
+```bash
+# With pip
+pip install mdformat-wikilink
+
+# With pipx
+pipx inject mdformat mdformat-wikilink
+```
+
 [mdformat]: https://github.com/executablebooks/mdformat
