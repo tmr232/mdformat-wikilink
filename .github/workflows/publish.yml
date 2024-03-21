@@ -21,7 +21,7 @@ jobs:
 
       - name: Build
         run: |
-          pip install "poetry==1.4.2"
+          pip install "poetry==1.8.2"
           poetry build
 
       - name: Publish
