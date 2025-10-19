@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
 
 jobs:
@@ -10,8 +10,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: [ 3.8, 3.9, "3.10", 3.11, 3.12 ]  # alter to sweep currently GA'ed versions
-        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        python-version: ["3.10", 3.11, 3.12, 3.13, 3.14] # alter to sweep currently GA'ed versions
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
       - uses: actions/checkout@v4
@@ -47,7 +47,7 @@ jobs:
     if: ${{ always() }}
     runs-on: ubuntu-latest
     name: Final Results
-    needs: [ tests ]
+    needs: [tests]
     steps:
       - run: |
           result="${{ needs.tests.result }}"
